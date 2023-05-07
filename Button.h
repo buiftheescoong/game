@@ -1,13 +1,14 @@
 #ifndef BUTTON_H
 #define BUTTON_H
-#define SMALL_BUTTON 1
-#define BIG_BUTTON 2
+
 
 #include "TextObject.h"
 const int BIG_BUTTON_WIDTH = 250;
 const int BIG_BUTTON_HEIGHT = 83;
 const int SMALL_BUTTON_WIDTH = 30;
 const int SMALL_BUTTON_HEIGHT = 30;
+#define SMALL_BUTTON 1
+#define BIG_BUTTON 2
 
 using namespace std;
 enum ButtonState

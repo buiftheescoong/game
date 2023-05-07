@@ -47,7 +47,7 @@ public:
   }
   bool LoadFromFile(string path, SDL_Renderer* Renderer)
     {
-        Free();
+        //Free();
 
         SDL_Texture* tmpTexture = NULL;
 

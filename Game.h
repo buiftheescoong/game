@@ -9,13 +9,14 @@
 #include<ctime>
 #include "SDL_utlis.h"
 
-SDL_Window* window;
-SDL_Renderer* renderer;
-TTF_Font* gFont = NULL;
-TTF_Font* Font_Menu = NULL;
+static SDL_Window* window;
+static SDL_Renderer* renderer;
+static TTF_Font* gFont = NULL;
+static TTF_Font* Font_Menu = NULL;
+static TTF_Font* GameOverFont = NULL;
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
-enum Action {LEFT, RIGHT, UP, DOWN, NONE, QUIT, PAUSE};
+enum Action {LEFT, RIGHT, UP, DOWN, NONE, QUIT};
 struct Game{
 
     const char * WINDOW_TITLE = "CAR GAME";
@@ -32,7 +33,7 @@ struct Game{
     SDL_Texture* obs3;
     SDL_Texture* obs4;
     SDL_Texture* racer;
-    SDL_Texture* game_over;
+    //SDL_Texture* game_over;
     SDL_Rect racerRect, obs1Rect, obs2Rect, obs3Rect, obs4Rect, backgroundRect, background1Rect;
 
     Mix_Music *gMusic = NULL;
@@ -51,7 +52,7 @@ struct Game{
         obs3 = loadTexture( "cars/obs3.png", renderer);
         obs4 = loadTexture( "cars/obs4.png", renderer);
         racer = loadTexture( "cars/racer.png", renderer);
-        game_over = loadTexture("cars/over.png", renderer);
+        //game_over = loadTexture("cars/over.png", renderer);
 
         SDL_QueryTexture(racer, NULL, NULL, &racerRect.w, &racerRect.h);
         SDL_QueryTexture(obs1, NULL, NULL, &obs1Rect.w, &obs1Rect.h);
@@ -76,7 +77,12 @@ struct Game{
         }
 
          Font_Menu = TTF_OpenFont("font/xirod.ttf",35);
-         if( gFont == NULL )
+         if( Font_Menu == NULL )
+         {
+            printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
+         }
+         GameOverFont = TTF_OpenFont("font/xirod.ttf",100);
+         if( GameOverFont == NULL )
          {
             printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
          }
@@ -132,10 +138,7 @@ struct Game{
     }
 
     void render(){
-        clearScreen();
-        SDL_RenderClear(renderer);
-
-
+        //clearScreen();
         SDL_RenderCopy(renderer, background, NULL, &backgroundRect);
         SDL_RenderCopy(renderer, background1, NULL, &background1Rect);
         SDL_RenderCopy(renderer, racer, NULL, &racerRect);
@@ -146,11 +149,11 @@ struct Game{
 
 
     }
-    void rendergame_over(){
+   /* void rendergame_over(){
         clearScreen();
         SDL_RenderCopy(renderer, game_over, NULL, NULL);
         SDL_RenderPresent( renderer );
-    }
+    }*/
     void destroy(){
         Mix_FreeChunk( over_Music );
         over_Music = NULL;
@@ -309,10 +312,10 @@ struct Game{
                 case SDLK_UP:
                     if(racerRect.y > 0){racerRect.y = racerRect.y - 20;};
                     return UP;
-                case SDLK_p:
+               /* case SDLK_p:
                    // SDL_Delay(5000);
                     //SDL_PumpEvents();
-                    return PAUSE;
+                    return PAUSE;*/
                 default: return NONE;
             }
         }
