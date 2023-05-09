@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1683617562 source:c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\main.cpp
+	"Base.h"
+	"TextObject.h"
+	"Score.h"
+	"Button.h"
+	"HandleButtons.h"
+	"GameFeatures.h"
+
+1683515029 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\sdl_utlis.h
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+
+1683515020 source:c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\sdl_utlis.cpp
+	<iostream>
+	"SDL_utlis.h"
+
+1683509429 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\game.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<cstdlib>
+	<ctime>
+	"SDL_utlis.h"
+
+1683619862 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\textobject.h
+	"Base.h"
+
+1683036987 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\baseobject.h
+	"Game.h"
+
+1683559265 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\score.h
+	"TextObject.h"
+
+1683616604 source:c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\handlebuttons.cpp
+	"HandleButtons.h"
+
+1683475502 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\handlebuttons.h
+	"Button.h"
+	"GameFeatures.h"
+
+1683530029 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\button.h
+	"TextObject.h"
+	"Base.h"
+
+1683380404 source:c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\button.cpp
+	"Button.h"
+
+1683616716 source:c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\gamefeatures.cpp
+	"GameFeatures.h"
+	"HandleButtons.h"
+
+1683616601 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\gamefeatures.h
+	"Button.h"
+
+1683566418 c:\users\pc\downloads\c¡c m‘n chuy n ng¿nh\ltnc\btl_game_sdl\game\gamesdl\base.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<bits/stdc++.h>
+
