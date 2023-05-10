@@ -6,9 +6,6 @@
 class TextObject{
 public:
   TextObject(){
-   /* text_color_.r = 255;
-    text_color_.g = 255;
-    text_color_.b = 255;*/
     texture_ = NULL;
     width_ = 0;
     height_= 0;
@@ -121,9 +118,9 @@ public:
   int getWidth() const {return width_;}
   int getHeight() const {return height_;}
   void SetText(const string& text) {str_val_ = text;}
-  string GetText() const {return str_val_;}
 
-private:
+
+
   string str_val_;
   SDL_Color text_color_;
   SDL_Texture* texture_;

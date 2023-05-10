@@ -13,9 +13,7 @@ public:
 	ButtonState currentState;
 	Button(int x, int y);
 	bool IsInside(SDL_Event *e, int size_);
-	void Render(SDL_Rect* currentClip, SDL_Renderer* Renderer, TextObject ButtonTex);
 
-private:
 	SDL_Point position;
 };
 #endif // BUTTON_H

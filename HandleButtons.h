@@ -4,7 +4,7 @@
 #include "GameFeatures.h"
 void HandlePlayButton(SDL_Event* e, Button& PlayButton, bool& QuitMenu, bool& Play);
 
-void HandleExitButton(SDL_Event* e, Button& ExitButton, bool& Quit);
+void HandleExitButton(SDL_Event* e, Button& ExitButton);
 
 void HandleContinueButton(Button ContinueButton, TextObject ContinueButtonTex[BUTTON_STATES], SDL_Event* e,
                           SDL_Renderer* Renderer,   bool& GameState);

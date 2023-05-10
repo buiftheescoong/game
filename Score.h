@@ -51,7 +51,7 @@ void DrawPlayerHighScore(TextObject high_score_game, SDL_Renderer* Renderer, TTF
     str_high_score += HighScore;
     high_score_game.SetText(str_high_score);
     high_score_game.loadFromRenderedText(Font, Renderer);
-    high_score_game.Render(Renderer,0, 100);
+    high_score_game.Render(Renderer,600, 0);
 }
 
 

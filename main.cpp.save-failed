@@ -98,7 +98,7 @@ void Init()
 			}
 
 			else{
-				//SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 
 				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
 					cout << "Cannot initialise SDL mixer!" << endl;
@@ -351,7 +351,7 @@ void Close(){
 
 }
 
-
+//int cnt =0;
 int main(int argc, char *argv[]){
 
     // srand(time(0));
@@ -370,6 +370,7 @@ int main(int argc, char *argv[]){
 
         //Menu Loop
         while(!QuitMenu){
+            //SDL_RenderClear(renderer);
             SDL_Event e_mouse;
             while(SDL_PollEvent(&e_mouse) != 0){
                 if (e_mouse.type == SDL_QUIT){
@@ -382,9 +383,16 @@ int main(int argc, char *argv[]){
                 HandleExitButton(&e_mouse, ExitButton, QuitMenu);
             }
 
-            SDL_RenderCopy(renderer,MenuTex,NULL,NULL);
+        //    SDL_RenderCopy(renderer,MenuTex,NULL,NULL);
             PlayButton.Render(NULL,renderer,PlayButtonTex[PlayButton.currentState]);
-            ExitButton.Render(NULL,renderer,ExitButtonTex[ExitButton.currentState]);
+       // cout <<   cnt++ << endl;
+          SDL_Rect exit;
+         exit = {ExitButton.position.x,
+						ExitButton.position.y,
+						ExitButtonTex[ExitButton.currentState].width_,
+						ExitButtonTex[ExitButton.currentState].height_};
+			SDL_RenderCopy(renderer, ExitButtonTex[ExitButton.currentState].texture_, NULL, &exit );
+  ExitButton.Render(NULL,renderer,ExitButtonTex[ExitButton.currentState]);
 
             SDL_RenderPresent(renderer);
         }

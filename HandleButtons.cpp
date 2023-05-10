@@ -15,18 +15,20 @@ void HandlePlayButton(SDL_Event* e, Button& PlayButton, bool& QuitMenu, bool& Pl
 
 	else {
         PlayButton.currentState = BUTTON_MOUSE_OUT;
-        cerr << PlayButton.IsInside(e, BIG_BUTTON) << '\n';
+
     }
 }
 
-void HandleExitButton(SDL_Event* e, Button& ExitButton, bool& Quit){
+void HandleExitButton(SDL_Event* e, Button& ExitButton){
     if (ExitButton.IsInside(e, BIG_BUTTON)){
         ExitButton.currentState = BUTTON_MOUSE_OVER;
         if(e->type == SDL_MOUSEBUTTONDOWN){
             exit(1);
         }
     }
-	else ExitButton.currentState = BUTTON_MOUSE_OUT;
+	else{
+        ExitButton.currentState = BUTTON_MOUSE_OUT;
+    }
 }
 
 void HandleContinueButton(Button ContinueButton, TextObject ContinueButtonTex[BUTTON_STATES], SDL_Event* e,
@@ -39,6 +41,7 @@ void HandleContinueButton(Button ContinueButton, TextObject ContinueButtonTex[BU
                 ContinueButton.currentState = BUTTON_MOUSE_OVER;
 				if(e->type == SDL_MOUSEBUTTONDOWN){
                         ContinueButton.currentState = BUTTON_MOUSE_OVER;
+                        Mix_ResumeMusic();
                         GameState = true;
                         BackToGame = true;
 				}
@@ -46,8 +49,11 @@ void HandleContinueButton(Button ContinueButton, TextObject ContinueButtonTex[BU
 			else{
 				ContinueButton.currentState = BUTTON_MOUSE_OUT;
 			}
+            SDL_Rect continue_;
+            continue_ = {ContinueButton.position.x, ContinueButton.position.y, ContinueButtonTex[ContinueButton.currentState].width_,
+            ContinueButtonTex[ContinueButton.currentState].height_};
+            SDL_RenderCopy(Renderer,ContinueButtonTex[ContinueButton.currentState].texture_,NULL,&continue_);
 
-			ContinueButton.Render(NULL, Renderer, ContinueButtonTex[ContinueButton.currentState]);
 
 			SDL_RenderPresent(Renderer);
 		}while (SDL_WaitEvent(e) != 0 && (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEMOTION));
@@ -61,6 +67,7 @@ void HandlePauseButton(SDL_Event* e,  SDL_Renderer* Renderer,  Button& PauseButt
         PauseButton.currentState = BUTTON_MOUSE_OVER;
 		switch (e->type){
             case SDL_MOUSEBUTTONDOWN:
+                Mix_PauseMusic();
                 break;
             case SDL_MOUSEBUTTONUP:
                 GameState = false;
@@ -75,7 +82,7 @@ void HandleNewGameButton(SDL_Event* e, Button& NewGameButton, bool& Quit, bool& 
         NewGameButton.currentState = BUTTON_MOUSE_OVER;
         if(e->type == SDL_MOUSEBUTTONDOWN){
             Quit = true;
-
+            Play = true;
         }
      }
     else NewGameButton.currentState = BUTTON_MOUSE_OUT;

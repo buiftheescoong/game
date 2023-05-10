@@ -2,7 +2,7 @@
 #include "HandleButtons.h"
 
     void DrawEndGameSelection(TextObject GameOverTex[2], Button& NewGameButton, TextObject NewGameButtonTex[BUTTON_STATES],
-                         Button& QuitButton, TextObject QuitButtonTex[BUTTON_STATES], Button& MenuButton,
+                         Button& QuitButton, TextObject QuitGameButtonTex[BUTTON_STATES], Button& MenuButton,
                         TextObject MenuButtonTex[BUTTON_STATES], SDL_Event* e, SDL_Renderer* renderer, bool &Play, int score,
                           int highscore, bool& QuitMenu, bool& MenuAndGameLoop)
     {
@@ -22,12 +22,12 @@
                     HandleMenuButton(e, MenuButton, Quit, Play, QuitMenu);
                     HandleQuitButton(e, QuitButton, Quit, Play, MenuAndGameLoop);
                 }
-                SDL_RenderClear(renderer);
+
                 if(score > highscore){
-                    GameOverTex[1].Render(renderer,180, 200);
+                    GameOverTex[1].Render(renderer,350, 300);
                 }
                 else{
-                    GameOverTex[0].Render(renderer,220, 200);
+                    GameOverTex[0].Render(renderer,350, 300);
                 }
                  SDL_Rect newgame;
                  newgame = {NewGameButton.position.x,NewGameButton.position.y,NewGameButtonTex[NewGameButton.currentState].width_,
@@ -42,7 +42,9 @@
                              QuitButtonTex[QuitButton.currentState].height_};
                  SDL_RenderCopy(renderer,QuitButtonTex[QuitButton.currentState].texture_,NULL,&quit);
 
-
+//                NewGameButton.Render(NULL,Renderer, NewGameButtonTex[NewGameButton.currentState]);
+//                MenuButton.Render(NULL,Renderer, MenuButtonTex[MenuButton.currentState]);
+//                QuitButton.Render(NULL,Renderer,QuitGameButtonTex[QuitButton.currentState]);
                 SDL_RenderPresent(renderer);
             }
         }

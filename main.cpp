@@ -98,7 +98,7 @@ void Init()
 			}
 
 			else{
-				//SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+
 
 				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
 					cout << "Cannot initialise SDL mixer!" << endl;
@@ -120,7 +120,6 @@ void LoadMedia(){
         obs4 = loadTexture( "cars/obs4.png", renderer);
         racer = loadTexture( "cars/racer.png", renderer);
         MenuTex =loadTexture("imgs/menu.jpg", renderer);
-        //game_over = loadTexture("cars/over.png", renderer);
 
         SDL_QueryTexture(racer, NULL, NULL, &racerRect.w, &racerRect.h);
         SDL_QueryTexture(obs1, NULL, NULL, &obs1Rect.w, &obs1Rect.h);
@@ -141,10 +140,6 @@ void LoadMedia(){
         {
             printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
         }
-
-       /* if (!MenuTex.LoadFromFile("imgs/menu.jpg", renderer)){
-            cout << "Failed to load menu image!" << endl;
-        }*/
 
           gMusic = Mix_LoadMUS( "sound/game.wav");
         if( gMusic == NULL )
@@ -208,16 +203,7 @@ void LoadMedia(){
             cout << "Failed to load game over text!" << endl;
             }
 }
-void waitUntilKeyPressed()
-{
-    SDL_Event e;
-    while (true) {
-        if ( SDL_WaitEvent(&e) != 0 &&
-             (e.type == SDL_KEYDOWN || e.type == SDL_QUIT) )
-            return;
-        SDL_Delay(100);
-    }
-}
+
 bool CheckCollision(const SDL_Rect& object1, const SDL_Rect& object2)
 {
     int left_a = object1.x;
@@ -354,7 +340,7 @@ void Close(){
 
 int main(int argc, char *argv[]){
 
-    // srand(time(0));
+
 
     Init();
     LoadMedia();
@@ -365,12 +351,11 @@ int main(int argc, char *argv[]){
     bool MenuAndGameLoop = true;
 
     while(MenuAndGameLoop){
-//        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-//        SDL_RenderClear(renderer);
+
 
         //Menu Loop
         while(!QuitMenu){
-            SDL_RenderClear(renderer);
+
             SDL_Event e_mouse;
             while(SDL_PollEvent(&e_mouse) != 0){
                 if (e_mouse.type == SDL_QUIT){
@@ -380,12 +365,18 @@ int main(int argc, char *argv[]){
                 }
 
                 HandlePlayButton(&e_mouse, PlayButton, QuitMenu, Play);
-                HandleExitButton(&e_mouse, ExitButton, QuitMenu);
+                HandleExitButton(&e_mouse, ExitButton);
             }
 
-            SDL_RenderCopy(renderer,MenuTex,NULL,NULL);
-            PlayButton.Render(NULL,renderer,PlayButtonTex[PlayButton.currentState]);
-            ExitButton.Render(NULL,renderer,ExitButtonTex[ExitButton.currentState]);
+          SDL_RenderCopy(renderer,MenuTex,NULL,NULL);
+          SDL_Rect play;
+          play = {PlayButton.position.x, PlayButton.position.y,PlayButtonTex[ExitButton.currentState].width_,
+						PlayButtonTex[ExitButton.currentState].height_ };
+          SDL_Rect exit;
+          exit = {ExitButton.position.x,ExitButton.position.y,ExitButtonTex[ExitButton.currentState].width_,
+                        ExitButtonTex[ExitButton.currentState].height_};
+          SDL_RenderCopy(renderer,PlayButtonTex[PlayButton.currentState].texture_,NULL,&play);
+          SDL_RenderCopy(renderer, ExitButtonTex[ExitButton.currentState].texture_, NULL, &exit );
 
             SDL_RenderPresent(renderer);
         }
@@ -409,14 +400,10 @@ int main(int argc, char *argv[]){
             while(!Quit){
                 //In game
                 if(GameState){
-
-
                     if( Mix_PlayingMusic() == 0 ){
                         //Play the music
                         Mix_PlayMusic( gMusic, -1 );
                     }
-
-
                     while (SDL_PollEvent(&e) != 0){
                         if (e.type == SDL_QUIT  ){
                             MenuAndGameLoop = false;
@@ -424,23 +411,23 @@ int main(int argc, char *argv[]){
                             Play = false;
                         }
                         if(e.type == SDL_KEYDOWN){
-                if(e.key.keysym.sym == SDLK_ESCAPE){
-                    MenuAndGameLoop = false;
-                            Quit = true;
-                            Play = false;
-                }
-                if(e.key.keysym.sym == SDLK_LEFT){if(racerRect.x > borderLeft){racerRect.x =racerRect.x - 20;}}
-                if(e.key.keysym.sym==SDLK_RIGHT) {if(racerRect.x < borderRight){racerRect.x =racerRect.x + 20;}}
-                if(e.key.keysym.sym == SDLK_DOWN) {if(racerRect.y < SCREEN_HEIGHT - 70){racerRect.y = racerRect.y + 20;}}
-                if(e.key.keysym.sym == SDLK_UP) {if(racerRect.y > 0){racerRect.y = racerRect.y - 20;}}
-            }
+                            if(e.key.keysym.sym == SDLK_ESCAPE){
+                                MenuAndGameLoop = false;
+                                Quit = true;
+                                Play = false;
+                            }
+                            if(e.key.keysym.sym == SDLK_LEFT){if(racerRect.x > borderLeft){racerRect.x =racerRect.x - 20;}}
+                            if(e.key.keysym.sym==SDLK_RIGHT) {if(racerRect.x < borderRight){racerRect.x =racerRect.x + 20;}}
+                            if(e.key.keysym.sym == SDLK_DOWN) {if(racerRect.y < SCREEN_HEIGHT - 70){racerRect.y = racerRect.y + 20;}}
+                            if(e.key.keysym.sym == SDLK_UP) {if(racerRect.y > 0){racerRect.y = racerRect.y - 20;}}
+                        }
                         HandlePauseButton(&e, renderer, PauseButton, ContinueButton, ContinueButtonTex,  GameState);
                     }
                     SDL_RenderClear(renderer);
                     if (background1Rect.y>0)
                     {
                        backgroundRect.y=0;
-                       background1Rect.y=backgroundRect.y-500;
+                       background1Rect.y=backgroundRect.y-600;
                     }
                     backgroundRect.y+=1;
                     background1Rect.y+=1;
@@ -480,7 +467,10 @@ int main(int argc, char *argv[]){
                     DrawPlayerHighScore(high_score_game,renderer, gFont, highscore);
 
 
-                    PauseButton.Render (NULL,renderer, PauseButtonTex[PauseButton.currentState]);
+                    SDL_Rect pause;
+                    pause = {PauseButton.position.x, PauseButton.position.y, PauseButtonTex[PauseButton.currentState].width_,
+                    PauseButtonTex[PauseButton.currentState].height_};
+                    SDL_RenderCopy(renderer,PauseButtonTex[PauseButton.currentState].texture_,NULL,&pause);
 
 
                     SDL_RenderPresent(renderer);
@@ -494,7 +484,7 @@ int main(int argc, char *argv[]){
 
     }
 }
-     //waitUntilKeyPressed();
+
 
     Close();
      return 0;

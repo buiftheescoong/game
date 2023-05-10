@@ -29,11 +29,11 @@ const int PAUSE_BUTTON_POSX = 30;
 const int PAUSE_BUTTON_POSY = 30;
 const int CONTINUE_BUTTON_POSX = 30;
 const int CONTINUE_BUTTON_POSY = 30;
-const int NEWGAME_BUTTON_POSX = 5;
+const int NEWGAME_BUTTON_POSX = 300;
 const int NEWGAME_BUTTON_POSY = 300;
-const int MENU_BUTTON_POSX = 5;
+const int MENU_BUTTON_POSX = 300;
 const int MENU_BUTTON_POSY = 400;
-const int QUIT_BUTTON_POSX = 5;
+const int QUIT_BUTTON_POSX = 300;
 const int QUIT_BUTTON_POSY = 500;
 
 const int BUTTON_STATES = 2;
